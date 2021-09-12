@@ -5,6 +5,10 @@
 int mas[1000000];
 int size = 1000000;
 
+int compare(const void* x1, const void* x2)   
+{
+    return (*(int*)x1 - *(int*)x2);            
+}
 
 void shell(int* items, int count)
 {
@@ -56,34 +60,40 @@ void qs(int* items, int left, int right) //вызов функции: qs(items, 0, count-1);
 }
 void main() {
     setlocale(LC_ALL, "Russian");
-    for (int i = 0; i < 100000; i++) {
-        mas[i] = rand() % 100;
-    }
-    //
+    //for (int i = 0; i < 100000; i++) {
+    //    mas[i] = rand() % 100;
+    //}
+    ////
     mas[0] = 1;
     for (int i = 0; i < 1000000; i++) {
         mas[i] = mas[i] + 1;
     }
-    //
-    mas[0] = 10000000;
-    for (int i = 0; i < 1000000; i++) {
-        mas[i] = mas[i] - 1;
-    }
-    //
-    mas[0] = 1;
-    for (int i = 0; i < 500000; i++) {
-        mas[i] = mas[i] - 1;
-    }
-    for (int i = 500000; i < 1000000; i++) {
-        mas[i] = mas[i] - 1;
-    }
-    //
-    shell(mas, size);
-    clock_t start, end;
+    ////
+    //mas[0] = 10000000;
+    //for (int i = 0; i < 1000000; i++) {
+    //    mas[i] = mas[i] - 1;
+    //}
+    ////
+    //mas[0] = 1;
+    //for (int i = 0; i < 500000; i++) {
+    //    mas[i] = mas[i] - 1;
+    //}
+    //for (int i = 500000; i < 1000000; i++) {
+    //    mas[i] = mas[i] - 1;
+    //}
+    ////
+   /* shell(mas, size);*/
+    /*clock_t start, end;
     start = clock();
     qs(mas, 0, size - 1);
     end = clock();
     double time = difftime(end, start) / CLOCKS_PER_SEC;
-    printf("\n Время затраченное на быструю сортировку составило - %f секунд", time);
-
+    printf("\n Время затраченное на быструю сортировку составило - %f секунд", time);*/
+    
+    clock_t start, end;
+    start = clock();
+    qsort(mas, 1000000, sizeof(int), compare);      
+    end = clock();
+    double time = difftime(end, start) / CLOCKS_PER_SEC;
+    printf("\n Время затраченное на быструю сортировку c помощью стандартной библиотеки   составило  - %f секунд", time);
 }
